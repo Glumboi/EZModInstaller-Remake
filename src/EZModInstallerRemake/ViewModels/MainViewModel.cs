@@ -220,6 +220,14 @@ namespace EZModInstallerRemake.ViewModels
                 return;
             }
 
+            DialogResult dlg = System.Windows.Forms.MessageBox.Show("Are you sure that you want to install the mods?\n" +
+                $"Here are the mods found:\n{ManageFiles.GetMods(PCBSPath)}",
+                "Info",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (dlg == DialogResult.No) return;
+
             ManageFiles.MoveAssetFilesTo(PCBSPath + @"\Glumboi", PCBSPath);
             Merger.MergeBatFilesFromPath(DebugInstall, PCBSPath);
 

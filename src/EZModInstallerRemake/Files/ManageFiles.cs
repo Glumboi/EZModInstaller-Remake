@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -99,6 +100,27 @@ namespace EZModInstallerRemake.Files
                     MessageBoxIcon.Information);
                 }
             });
+        }
+
+        public static string GetMods(string pcbsPath)
+        {
+            var glumboiPath = pcbsPath + "\\Glumboi";
+            var result = string.Empty;
+
+            if (Directory.Exists(glumboiPath))
+            {
+                var files = Directory.GetFiles(glumboiPath);
+
+                foreach (var item in files)
+                {
+                    if (item.EndsWith(".bat"))
+                    {
+                        result += item.Split('\\').Last() + "\n";
+                    }
+                }
+            }
+
+            return result;
         }
     }
 }
